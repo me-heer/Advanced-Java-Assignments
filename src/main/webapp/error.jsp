@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Error Occured.</h1>
-    </body>
+        <h1>Error Occured. Dhyan Deta hoi to!</h1>
+    </body> 
 </html>
