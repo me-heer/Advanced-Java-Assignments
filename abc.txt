@@ -1,3 +1,0 @@
-This is a file.
-Added maven buildpack manually.
-Cleared buildpack.
