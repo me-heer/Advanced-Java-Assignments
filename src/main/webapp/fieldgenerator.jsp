@@ -63,14 +63,19 @@
                         <button type="reset" class="genric-btn info-border circle"> Reset </button>
                     </div>
                     <%
-                        String submit = request.getParameter("submit");
-                        if (submit != null) {
-                            int numberOfTextFields = Integer.parseInt(request.getParameter("textfields"));
-                            out.println("Number of text fields: " + numberOfTextFields + "</br>");
-                            for (int i = 0; i < numberOfTextFields; i++) {
-                                out.println("<input type='text' class='form-control valid' name='textfield" + i + "' /> </br>");
-                        }
-                        }
+                        try {
+                                String submit = request.getParameter("submit");
+                                if (submit != null) {
+                                    int numberOfTextFields = Integer.parseInt(request.getParameter("textfields"));
+                                    out.println("Number of text fields: " + numberOfTextFields + "</br>");
+                                    for (int i = 0; i < numberOfTextFields; i++) {
+                                        out.println("<input type='text' class='form-control valid' name='textfield" + i + "' /> </br>");
+                                    }
+                                }
+                            } catch (NumberFormatException e) {
+                                out.println("Enter a valid input.");
+                            }
+                        
                     %>
                 </form>
             </div>
