@@ -54,18 +54,18 @@
           <div>
                       <form method="post">
                         <div>
-                            <input class="form-control valid" type="text" name="username" placeholder="username"
-                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'username'"
+                            <input class="form-control valid" type="text" name="username" placeholder="Username"
+                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'"
                                             >
                         </div>
                             <div class="mt-10">
-                                    <input type="password" name="password" placeholder="password"
-                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'"
+                                    <input type="password" name="password" placeholder="Password"
+                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
                                             class="form-control valid">
                             </div>
                           <div class="button-group-area mt-10">
 				
-                              <button type="submit" class="genric-btn primary-border circle" name="submit" value="submit">submit</button>
+                              <button type="submit" class="genric-btn primary-border circle" name="submit" value="submit">Submit</button>
 				<button type="reset" class="genric-btn info-border circle"> Reset </button>
 			  </div>
                           <div class="mt-10">

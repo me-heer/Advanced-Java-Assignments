@@ -52,7 +52,7 @@
   
       <div style="position: absolute; left: 35%; top: 35%">
                      <div class="title_text title_text2 ">
-                        <h3>Conversion</h3>
+                        <h3>Temperature Converter</h3>
                      </div>
           <div>
                       <form method="post">
@@ -60,24 +60,46 @@
                             <input class="form-control valid" type="number" name="fahrenheit" placeholder="F"
                                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'F'"
                                             >
+                            <input class="form-control valid" type="number" name="celsius" placeholder="C"
+                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'C'"
+                                            >
                         </div>
                           <div class="button-group-area mt-10">
 				
-                              <button type="submit" class="genric-btn primary-border circle" name="submit" value="submit">submit</button>
-				<button type="reset" class="genric-btn info-border circle"> Reset </button>
+                            <button type="submit" class="genric-btn primary-border circle" name="ctof" value="submitted">C to F</button>
+                            <button type="submit" class="genric-btn primary-border circle" name="ftoc" value="submitted">F to C</button>
+			    <button type="reset" class="genric-btn info-border circle"> Reset </button>
 			  </div>
                           <div class="mt-10">
                                     <%  
-            if(request.getParameter("submit") != null)
+            if(result != null)
             {
-                String input = request.getParameter("fahrenheit");
-                if(input != null)
-                {
-                    Double fahrenheit = Double.parseDouble(input);
-                    Double celsius = (fahrenheit - 32) * (5.0/9.0);
-                    result += celsius;
+                try{
+                    String isCtoF = request.getParameter("ctof");
+                        String isFtoC = request.getParameter("ftoc");
+                        if (isCtoF != null) {
+                            String inputC = request.getParameter("celsius");
+                            if (inputC != null) {
+                                Double celsius = Double.parseDouble(inputC);
+                                Double fahrenheit = ((9.0 / 5.0) * celsius) + 32;
+                                result += ("Celsius: " + celsius + " converted to Fahrenheit: " + fahrenheit + "</br>");
+                            }
+                        }
+                        if (isFtoC != null) {
+                            String inputF = request.getParameter("fahrenheit");
+                            if (inputF != null) {
+                                Double fahrenheit = Double.parseDouble(inputF);
+                                Double celsius = (fahrenheit - 32) * (5.0 / 9.0);
+                                result += ("Fahrenheit: " + fahrenheit + " converted to Celsius: " + celsius + "</br>");
+                            }
+                        }
+
+                }catch(NumberFormatException e){
+                    result += ("Enter a valid input." + "</br>"); 
                 }
-                out.println(result);
+                finally{
+                    out.println(result);
+                }
                 
             }
         %>
