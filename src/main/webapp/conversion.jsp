@@ -95,13 +95,11 @@
                                     result += ("Fahrenheit: " + fahrenheit + " converted to Celsius: " + celsius + "</br>");
                                 }
                             }
+                            out.println(result);
 
                         } catch (NumberFormatException e) {
                             result += ("Enter a valid input." + "</br>");
-                        } finally {
-                            out.println(result);
                         }
-
                     }
                 %>
             </div>
