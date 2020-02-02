@@ -120,7 +120,8 @@
                                     <input type="text" name="result" placeholder="result" value="<%= result %>"
                                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'result'"
                                             class="form-control valid">
-                            </div>
+                          </div>
+
                     </form>
             </div>
         </div>
@@ -163,7 +164,7 @@
    <script src="js/mail-script.js"></script>
 
    <script src="js/main.js"></script>
-
+<% result = 0; %>
 </body>
 
 </html>

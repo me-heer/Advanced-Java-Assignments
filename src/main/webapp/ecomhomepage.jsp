@@ -105,7 +105,7 @@
                                 <p>50$</p>
                                 <form action="ecomhomepage.jsp" method="get">
                                     <input type="hidden" name="pid" value="1">
-                                    <input type="number" name="qty">
+                                    <input type="number" name="qty" placeholder="quantity">
                                     <button type="submit" class="genric-btn primary-border circle" name="addtocart" value="submitted">Add to Cart</button>
                                 </form>
                             </div>
@@ -125,11 +125,10 @@
                             </div>
                             <div class="speaker_name text-center">
                                 <h3>  <%= p1.getProductName() %> </h3>
-
                                 <p>Kidney</p>
                                 <form action="ecomhomepage.jsp" method="get">
                                     <input type="hidden" name="pid" value="2">
-                                    <input type="number" name="qty"/>
+                                    <input type="number" name="qty" placeholder="quantity"/>
                                     <button type="submit" class="genric-btn primary-border circle" name="addtocart" value="submitted">Add to Cart</button>
                                 </form>
 
