@@ -11,8 +11,8 @@
 <head>
     <title>Checkout</title>
     <%
-        if(request.getParameter("pid") != null){
-            Integer removeItem = Integer.parseInt(request.getParameter("pid"));
+        if(request.getParameter("delete") != null){
+            Integer removeItem = Integer.parseInt(request.getParameter("delete"));
             HashMap<Integer, Integer> cartItems = (HashMap<Integer,Integer>) session.getAttribute("cart");
             cartItems.remove(removeItem);
             session.setAttribute("cart",cartItems);
@@ -26,6 +26,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Quantity</th>
             <th>Remove</th>
         </tr>
     <%
@@ -33,10 +34,15 @@
         if(session.getAttribute("cart") != null){
             HashMap<Integer, Integer> cartItems = (HashMap<Integer,Integer>) session.getAttribute("cart");
             Collection<Integer> pids = cartItems.keySet();
+
+            Collection<Integer> qtys = cartItems.values();
             HashMap<Integer, Product> products = (HashMap<Integer,Product>)application.getAttribute("products");
             Iterator pidIterator = pids.iterator();
+            Iterator pidGetter = pids.iterator();
+            Iterator qtyIterator = qtys.iterator();
             while(pidIterator.hasNext()){
                 Product temp = products.get(pidIterator.next());
+                Integer tempQuantity = (Integer) qtyIterator.next();
                 out.println("<tr>");
                 out.println("<td>");
                 out.println(temp.getProductId());
@@ -51,6 +57,15 @@
                 out.println(temp.getProductPrice());
                 out.println("</td>");
                 out.println("<td>");
+                out.println(tempQuantity);
+                out.println("</td>");
+                out.println("<td>");
+                out.println("<form action='checkout.jsp' method='post'> " +
+                        "<input type='hidden' name='delete' value='" + pidGetter.next() + "'>" +
+                        "<input type='submit' name='submit'>" +
+                        "</form>"
+
+                );
                 out.println("</td>");
                 out.println("</tr>");
 
