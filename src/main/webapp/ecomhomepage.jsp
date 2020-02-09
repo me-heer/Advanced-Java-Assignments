@@ -65,6 +65,16 @@
             Product p3 = new Product(3, "Samsung", "It will explode", 7d, 5);
             Product p4 = new Product(4, "Windows", "Dead", 5000d, 5);
             Product p5 = new Product(5, "Java", "Coffee", 10d, 5);
+            HashMap<Integer, Product> products = new HashMap<Integer, Product>();
+            products.put(1, p1);
+            products.put(2, p2);
+            products.put(3, p3);
+            products.put(4, p4);
+            products.put(5, p5);
+            if(application.getAttribute("prodcuts") == null)
+            {
+                application.setAttribute("products",products);
+            }
         %>
         <!-- speakers_start -->
         <div class="speakers_area">
@@ -82,11 +92,13 @@
                                     if(session.getAttribute("cart") != null)
                                         totalItems = ((HashMap<Integer,Integer>)session.getAttribute("cart")).size();
                                 %>
-                                <%= totalItems %>
+                                <a href="checkout.jsp" name="checkout" style="color: #6610f2"><%= totalItems %></a>
                             </h3>
+
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-xl-5 col-md-6">
                         <div class="single_speaker">
@@ -101,8 +113,8 @@
                                 </div>
                             </div>
                             <div class="speaker_name text-center">
-                                <h3>Product A</h3>
-                                <p>50$</p>
+                                <h3>  <%= p1.getProductName() %> </h3>
+                                <p>Kidney</p>
                                 <form action="ecomhomepage.jsp" method="get">
                                     <input type="hidden" name="pid" value="1">
                                     <input type="number" name="qty" placeholder="quantity">
@@ -124,14 +136,13 @@
                                 </div>
                             </div>
                             <div class="speaker_name text-center">
-                                <h3>  <%= p1.getProductName() %> </h3>
-                                <p>Kidney</p>
+                                <h3>  <%= p2.getProductName() %> </h3>
+                                <p><%= p2.getProductPrice() %></p>
                                 <form action="ecomhomepage.jsp" method="get">
                                     <input type="hidden" name="pid" value="2">
                                     <input type="number" name="qty" placeholder="quantity"/>
                                     <button type="submit" class="genric-btn primary-border circle" name="addtocart" value="submitted">Add to Cart</button>
                                 </form>
-
                             </div>
                         </div>
 

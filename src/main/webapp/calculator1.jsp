@@ -121,7 +121,6 @@
                                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'result'"
                                             class="form-control valid">
                           </div>
-
                     </form>
             </div>
         </div>
