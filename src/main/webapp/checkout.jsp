@@ -62,7 +62,7 @@
                 out.println("<td>");
                 out.println("<form action='checkout.jsp' method='post'> " +
                         "<input type='hidden' name='delete' value='" + pidGetter.next() + "'>" +
-                        "<input type='submit' name='submit'>" +
+                        "<input type='submit' name='submit' value='delete'>" +
                         "</form>"
 
                 );

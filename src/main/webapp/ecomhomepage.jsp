@@ -8,6 +8,9 @@
 <!DOCTYPE html>
 <!doctype html>
 <html class="no-js" lang="zxx">
+<%!
+    String errorMessage = "";
+%>
 <%
     HashMap<Integer, Integer> cartItems = new HashMap<Integer, Integer>();
     String isAddedToCart = request.getParameter("addtocart");
@@ -18,10 +21,18 @@
             cartItems = (HashMap<Integer, Integer>) session.getAttribute("cart");
         }
 
-        int pid = Integer.parseInt(request.getParameter("pid"));
-        int qty = Integer.parseInt(request.getParameter("qty"));
-        cartItems.put(pid,qty);
-        session.setAttribute("cart",cartItems);
+        try{
+            int pid = Integer.parseInt(request.getParameter("pid"));
+            int qty = Integer.parseInt(request.getParameter("qty"));
+            if(qty <= 0)
+                    throw new NumberFormatException();
+            cartItems.put(pid,qty);
+            session.setAttribute("cart",cartItems);
+        }catch(NumberFormatException nfe){
+            errorMessage += "Enter valid quantity. Sav ladi na levay.";
+        }
+
+
     }
 %>
     <head>
@@ -76,14 +87,15 @@
                 application.setAttribute("products",products);
             }
         %>
+
+
+
         <!-- speakers_start -->
-        <div class="speakers_area">
-            <h1 class="horizontal_text d-none d-lg-block">
-                Products
-            </h1>
+        <div class="speakers_area" style="padding-top: 10px">
+            <a href="checkout.jsp" class="genric-btn primary-border circle" name="checkout" style="position: fixed; bottom: 10px; right: 10px "> Checkout</a>
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-12">
+                    <div class="col-xl-12" style="height: 10px">
                         <div class="section_title_large mb-95">
                             <h3>
                                 Products
@@ -92,9 +104,14 @@
                                     if(session.getAttribute("cart") != null)
                                         totalItems = ((HashMap<Integer,Integer>)session.getAttribute("cart")).size();
                                 %>
-                                <a href="checkout.jsp" name="checkout" style="color: #6610f2"><%= totalItems %></a>
-                            </h3>
+                                <%= totalItems %>
 
+                            </h3>
+                            <h3>
+                                <%
+                                    out.println(errorMessage);
+                                %>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -104,17 +121,10 @@
                         <div class="single_speaker">
                             <div class="speaker_thumb">
                                 <img src="img/speakers/1.png" alt="">
-                                <div class="hover_overlay">
-                                    <div class="social_icon">
-
-                                        <a href="ecomhomepage.jsp?pid=1"><i class="fa fa-plus-circle"></i></a>
-
-                                    </div>
-                                </div>
                             </div>
                             <div class="speaker_name text-center">
                                 <h3>  <%= p1.getProductName() %> </h3>
-                                <p>Kidney</p>
+                                <p><b>Price:</b> Kidney</p>
                                 <form action="ecomhomepage.jsp" method="get">
                                     <input type="hidden" name="pid" value="1">
                                     <input type="number" name="qty" placeholder="quantity">
@@ -122,30 +132,26 @@
                                 </form>
                             </div>
                         </div>
+
                     </div>
+
                     <div class="col-xl-5 offset-xl-2 col-md-6">
                         <div class="single_speaker">
                             <div class="speaker_thumb">
                                 <img src="img/speakers/2.png" alt="">
-                                <div class="hover_overlay">
-                                    <div class="social_icon">
 
-                                        <a href="ecomhomepage.jsp"><i class="fa fa-plus-circle"></i></a>
-
-                                    </div>
-                                </div>
                             </div>
                             <div class="speaker_name text-center">
                                 <h3>  <%= p2.getProductName() %> </h3>
-                                <p><%= p2.getProductPrice() %></p>
+                                <p><b>Price:</b> <%= p2.getProductPrice() %></p>
                                 <form action="ecomhomepage.jsp" method="get">
                                     <input type="hidden" name="pid" value="2">
                                     <input type="number" name="qty" placeholder="quantity"/>
                                     <button type="submit" class="genric-btn primary-border circle" name="addtocart" value="submitted">Add to Cart</button>
                                 </form>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -211,7 +217,7 @@
         <script src="js/mail-script.js"></script>
 
         <script src="js/main.js"></script>
-
+        <% errorMessage = ""; %>
     </body>
 
 </html>
