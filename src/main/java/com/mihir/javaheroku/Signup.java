@@ -50,11 +50,15 @@ public class Signup extends HttpServlet {
                 message += "The password should contain at least 1 uppercase letter.</br>";
             
             //confirm password validation
-            
             String confirmPassword = request.getParameter("cpassword");
             if(!confirmPassword.equals(password))
                 message += "Password and Confirm Password must be the same. </br>";
-            
+
+            //email validation
+            String email = request.getParameter("email");
+            if(!Pattern.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)* @[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",email))
+                message += "Invalid E-mail Address. </br>";
+
             //phone number validation
             String phoneNumber = request.getParameter("phonenumber");
             if(!Pattern.matches("^[0-9]{6,10}$",phoneNumber))

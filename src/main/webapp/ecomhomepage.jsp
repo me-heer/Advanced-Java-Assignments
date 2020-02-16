@@ -29,7 +29,7 @@
             cartItems.put(pid,qty);
             session.setAttribute("cart",cartItems);
         }catch(NumberFormatException nfe){
-            errorMessage += "Enter valid quantity. Sav ladi na levay.";
+            errorMessage += "Enter valid quantity. Kai lidha vagar checkout na hoi, kakav.";
         }
 
 
@@ -92,10 +92,10 @@
 
         <!-- speakers_start -->
         <div class="speakers_area" style="padding-top: 10px">
-            <a href="checkout.jsp" class="genric-btn primary-border circle" name="checkout" style="position: fixed; bottom: 10px; right: 10px "> Checkout</a>
+            <a href="checkout.jsp" class="genric-btn primary-border circle" name="checkout" style="position: fixed; top: 10px; right: 10px "> Checkout</a>
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-12" style="height: 10px">
+                    <div class="col-xl-12" style="height: 30px">
                         <div class="section_title_large mb-95">
                             <h3>
                                 Products
@@ -104,14 +104,11 @@
                                     if(session.getAttribute("cart") != null)
                                         totalItems = ((HashMap<Integer,Integer>)session.getAttribute("cart")).size();
                                 %>
-                                <%= totalItems %>
+                                <%= totalItems %> <br/>
+                                <%= errorMessage %>
 
                             </h3>
-                            <h3>
-                                <%
-                                    out.println(errorMessage);
-                                %>
-                            </h3>
+
                         </div>
                     </div>
                 </div>

@@ -1,32 +1,12 @@
-<%-- 
-    Document   : calculator1
+<%--
+    Document   : dynamicLogin
     Created on : 20 Jan, 2020, 1:22:24 PM
     Author     : mformihir
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
-
-<%!
-    double result = 0;
-
-    public static double add(double a, double b) {
-        return a + b;
-    }
-
-    public static double sub(double a, double b) {
-        return a - b;
-    }
-
-    public static double mul(double a, double b) {
-        return a * b;
-    }
-
-    public static double div(double a, double b) {
-        return a / b;
-    }
-%>
 
 <head>
     <meta charset="utf-8">
@@ -61,64 +41,61 @@
 
 <!-- header-start -->
 <header>
-    <title> Calculator </title>
+    <title> Login </title>
 </header>
 <!-- header-end -->
 
-<%
-    if (request.getParameter("operation") != null) {
-        char operation = request.getParameter("operation").charAt(0);
-        double n1 = Double.parseDouble(request.getParameter("number1"));
-        double n2 = Double.parseDouble(request.getParameter("number2"));
-
-        switch (operation) {
-            case '+':
-                result = add(n1, n2);
-                break;
-            case '-':
-                result = sub(n1, n2);
-                break;
-            case '*':
-                result = mul(n1, n2);
-                break;
-            case '/':
-                result = div(n1, n2);
-                break;
-        }
-    }
-%>
 
 <!-- slider_area_start -->
 
 <div style="position: absolute; left: 35%; top: 35%">
     <div class="title_text title_text2 ">
-        <h3>Calculator</h3>
+        <h3>Login</h3>
     </div>
     <div>
         <form method="post">
             <div>
-                <input class="form-control valid" type="text" name="number1" placeholder="number1"
-                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'number1'" required
+                <input class="form-control valid" type="text" name="username" placeholder="Username"
+                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'"
                 >
             </div>
             <div class="mt-10">
-                <input type="text" name="number2" placeholder="number2"
-                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'number2'" required
+                <input type="password" name="password" placeholder="Password"
+                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
                        class="form-control valid">
             </div>
             <div class="button-group-area mt-10">
 
-                <button type="submit" class="genric-btn primary-border circle" name="operation" value="+">+</button>
-                <button type="submit" class="genric-btn primary-border circle" name="operation" value="-">-</button>
-                <button type="submit" class="genric-btn primary-border circle" name="operation" value="*">*</button>
-                <button type="submit" class="genric-btn primary-border circle" name="operation" value="/">/</button>
-
-                <button type="reset" class="genric-btn info-border circle">Reset</button>
+                <button type="submit" class="genric-btn primary-border circle" name="submit" value="submit">Login
+                </button>
+                <button type="reset" class="genric-btn info-border circle"> Reset</button>
+                <a href="signup2.jsp" class="genric-btn primary-border circle" name="signup"> Sign Up</a>
             </div>
             <div class="mt-10">
-                <input type="text" name="result" placeholder="result" value="<%= result %>"
-                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'result'"
-                       class="form-control valid">
+                <%
+                    if (request.getParameter("submit") != null) {
+                        String result = "";
+                        String username = request.getParameter("username");
+                        String password = request.getParameter("password");
+                        if (username.isEmpty())
+                            result += "Username to nakho kaik!</br>";
+                        if (password.isEmpty())
+                            result += "Password to nakho kaik!</br>";
+                        if(result.length() == 0)
+                        {
+                            Class.forName("com.mysql.jdbc.Driver");
+                            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ajt","mihir","Mihir67_");
+                            Statement stmt = con.createStatement();
+                            ResultSet rs = stmt.executeQuery("SELECT * FROM student_details WHERE username='"+username+"' AND password='"+password+"'");
+                            if(!rs.isBeforeFirst())
+                                result += "No user found.";
+                            else{
+                                result += "Login success!";
+                            }
+                        }
+                        out.println(result);
+                    }
+                %>
             </div>
         </form>
     </div>
@@ -162,7 +139,7 @@
 <script src="js/mail-script.js"></script>
 
 <script src="js/main.js"></script>
-<%= result = 0; %>
+
 </body>
 
 </html>
