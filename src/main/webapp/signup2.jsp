@@ -109,7 +109,8 @@
             message += "SignUp Success!";
 
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ajt","mihir","Mihir67_");
+            Connection con = DriverManager.getConnection("jdbc:mysql://b1a2da7cca77d9:a9abf445@us-cdbr-iron-east-04.cleardb.net/heroku_909da1d2af2e3b5?reconnect=true","b1a2da7cca77d9","a9abf445");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ajt","mihir","Mihir67_");
             Statement stmt = con.createStatement();
             int rs = stmt.executeUpdate("INSERT INTO student_details (username, password, email, phone, semester, branch, gender, hobbies) VALUES ('" + username +"', '"+ password +  "','"+email+"', "+phoneNumber+", "+semester+",'"+branch+"','"+gender+"','" +hobbiesArray + "')");
             message += rs + " rows affected.";
