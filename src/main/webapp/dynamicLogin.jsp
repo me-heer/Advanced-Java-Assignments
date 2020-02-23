@@ -84,7 +84,7 @@
                         if(result.length() == 0)
                         {
                             Class.forName("com.mysql.jdbc.Driver");
-                            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ajt","mihir","Mihir67_");
+                            Connection con = DriverManager.getConnection("jdbc:mysql://b1a2da7cca77d9:a9abf445@us-cdbr-iron-east-04.cleardb.net/heroku_909da1d2af2e3b5?reconnect=true","b1a2da7cca77d9","a9abf445");
                             Statement stmt = con.createStatement();
                             ResultSet rs = stmt.executeQuery("SELECT * FROM student_details WHERE username='"+username+"' AND password='"+password+"'");
                             if(!rs.isBeforeFirst())

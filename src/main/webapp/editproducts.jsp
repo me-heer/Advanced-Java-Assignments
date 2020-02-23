@@ -72,7 +72,8 @@
 
 <%
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ajt","mihir","Mihir67_");
+    //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ajt","mihir","Mihir67_");
+    Connection con = DriverManager.getConnection("jdbc:mysql://b1a2da7cca77d9:a9abf445@us-cdbr-iron-east-04.cleardb.net/heroku_909da1d2af2e3b5?reconnect=true","b1a2da7cca77d9","a9abf445");
     Statement stmt = con.createStatement();
 
     if(request.getParameter("addproduct") != null)
@@ -82,11 +83,16 @@
             String pdesc = request.getParameter("pdesc");
             float price = Float.parseFloat(request.getParameter("price"));
             int stock = Integer.parseInt(request.getParameter("stock"));
-            int rs = stmt.executeUpdate("INSERT INTO products (pname, pdesc, price, stock) VALUES ('"+pname+"', '"+pdesc+"', price, stock)");
+            String dql = "INSERT INTO products" +
+                    " (pname, pdesc, price, stock) " +
+                    "VALUES ('"+pname+"','"+pdesc+"',"+price+","+stock+")";
+                    out.println(dql);
+
+            int rs = stmt.executeUpdate(dql);
             out.println(rs + "product/s added.");
         }catch(NumberFormatException e){
             out.println("Enter valid input.");
-        }catch(SQLException e){
+        }catch(Exception e){
             out.println("Database error.");
         }
 
